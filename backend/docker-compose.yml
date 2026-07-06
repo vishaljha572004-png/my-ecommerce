@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  # ── MongoDB ──────────────────────────────────────────────────
+  mongo:
+    image: mongo:7.0
+    container_name: grocery_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: grocery
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - grocery_net
+
+  # ── Mongo Express (Mongo GUI) ─────────────────────────────────
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: grocery_mongo_express
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpassword
+      ME_CONFIG_MONGODB_URL: mongodb://root:rootpassword@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - grocery_net
+
+  # ── Redis ─────────────────────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: grocery_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - grocery_net
+
+  # ── Redis Commander (Redis GUI) ───────────────────────────────
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: grocery_redis_commander
+    restart: unless-stopped
+    depends_on:
+      - redis
+    ports:
+      - "8082:8081"
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    networks:
+      - grocery_net
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  grocery_net:
+    driver: bridge
