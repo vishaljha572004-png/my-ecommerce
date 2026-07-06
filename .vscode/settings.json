@@ -1,0 +1,17 @@
+{
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "package.json": "json"
+  },
+  "C_Cpp.codeAnalysis.runAutomatically": false,
+  "C_Cpp.codeAnalysis.enabled": false,
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
