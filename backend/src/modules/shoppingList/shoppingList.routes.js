@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const shoppingListController = require('./shoppingList.controller');
-const { protect } = require('../auth/auth.middleware');
+const { authenticate } = require('../auth/auth.middleware');
 
-router.use(protect); 
+router.use(authenticate); 
 
 router.route('/')
   .get(shoppingListController.getLists)
