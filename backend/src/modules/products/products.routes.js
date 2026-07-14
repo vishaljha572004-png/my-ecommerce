@@ -8,12 +8,12 @@ const { createProductSchema, updateProductSchema } = require("./products.validat
 const cacheMiddleware = require("../../cache/cache.middleware");
 const { upload } = require("../../config/cloudinary");
 
-// Public routes
+
 router.get("/", productsController.getAllProducts);
 router.get("/featured", cacheMiddleware(600), productsController.getFeaturedProducts);
 router.get("/:id", productsController.getProductById);
 
-// Admin only routes
+
 router.post("/",
   authenticate, adminOnly,
   upload.array("images", 5),
@@ -26,7 +26,7 @@ router.put("/:id",
   productsController.updateProduct
 );
 
-// Upload image for existing product
+
 router.post("/:id/upload-image",
   authenticate, adminOnly,
   upload.array("images", 5),

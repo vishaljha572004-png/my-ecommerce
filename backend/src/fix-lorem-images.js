@@ -38,7 +38,7 @@ const fixLoremImages = async () => {
       if (p) {
         console.log(`Fixing ${name} using ${keywords}...`);
         try {
-          // Add a random timestamp so loremflickr gives a fresh image if we retry
+          
           const res = await fetch(`https://loremflickr.com/500/500/${keywords}?lock=${Math.floor(Math.random()*1000)}`);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           

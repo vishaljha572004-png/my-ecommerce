@@ -5,21 +5,21 @@ const PORT = env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    // 1. Connect to MongoDB
+    
     await mongo.connect();
 
-    // 2. Connect to Redis only if not already connected
+    
     if (redis.cacheClient.status !== "ready") {
       await redis.connect();
     }
 
-    // 3. Start BullMQ workers
+    
     require("./workers/order.worker");
     require("./workers/notification.worker");
     require("./workers/inventory.worker");
     console.log("📬  BullMQ workers started");
 
-    // 4. Start HTTP server
+    
     const server = app.listen(PORT, () => {
       console.log(`\n🚀  Server running on http://localhost:${PORT}`);
       console.log(`📋  Health check: http://localhost:${PORT}/api/health`);
@@ -27,11 +27,11 @@ const startServer = async () => {
       console.log(`🔴  Redis UI:     http://localhost:8082\n`);
     });
 
-    // 5. Initialize Socket.io
+    
     const socket = require("./socket");
     socket.init(server);
 
-    // Graceful Shutdown
+    
     const shutdown = async (signal) => {
       console.log(`\n${signal} received. Shutting down gracefully...`);
       server.close(async () => {

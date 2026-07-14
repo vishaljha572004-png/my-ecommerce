@@ -4,7 +4,7 @@ const KEYS = require("../../cache/cache.keys");
 const { env } = require("../../config");
 const paginate = require("../../common/utils/paginate");
 
-// ── Search products ──────────────────────────────────────────────
+
 const searchProducts = async (query, queryParams) => {
   const cacheKey = KEYS.SEARCH_RESULTS(
     `${query}-${JSON.stringify(queryParams)}`

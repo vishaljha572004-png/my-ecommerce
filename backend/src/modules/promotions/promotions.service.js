@@ -3,7 +3,7 @@ const AppError = require("../../common/errors/AppError");
 const cacheService = require("../../cache/cache.service");
 const KEYS = require("../../cache/cache.keys");
 
-// ── Validate coupon ──────────────────────────────────────────────
+
 const validateCoupon = async (code, orderAmount) => {
   const cacheKey = KEYS.COUPON(code);
 
@@ -31,7 +31,7 @@ const validateCoupon = async (code, orderAmount) => {
     );
   }
 
-  // Calculate discount
+  
   let discount = 0;
   if (coupon.discountType === "percentage") {
     discount = (orderAmount * coupon.discountValue) / 100;
@@ -51,7 +51,7 @@ const validateCoupon = async (code, orderAmount) => {
   };
 };
 
-// ── Apply coupon (increment usage) ──────────────────────────────
+
 const applyCoupon = async (code) => {
   await Coupon.findOneAndUpdate(
     { code: code.toUpperCase() },
@@ -60,19 +60,19 @@ const applyCoupon = async (code) => {
   await cacheService.del(KEYS.COUPON(code));
 };
 
-// ── Admin: Create coupon ─────────────────────────────────────────
+
 const createCoupon = async (data) => {
   const existing = await Coupon.findOne({ code: data.code.toUpperCase() });
   if (existing) throw new AppError("Coupon code already exists", 409);
   return Coupon.create({ ...data, code: data.code.toUpperCase() });
 };
 
-// ── Admin: Get all coupons ───────────────────────────────────────
+
 const getAllCoupons = async () => {
   return Coupon.find().sort({ createdAt: -1 }).lean();
 };
 
-// ── Admin: Toggle coupon active status ───────────────────────────
+
 const toggleCoupon = async (id) => {
   const coupon = await Coupon.findById(id);
   if (!coupon) throw new AppError("Coupon not found", 404);

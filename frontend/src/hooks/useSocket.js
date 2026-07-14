@@ -27,7 +27,7 @@ export const useSocket = () => {
 
         socketInstance.on('notification', (data) => {
           toast.success(`${data.title}: ${data.message}`, { duration: 5000 });
-          // If it's an order update, invalidate orders query globally to keep it fresh
+          
           if (data.orderId) {
             queryClient.invalidateQueries(['my-orders']);
           }
@@ -47,8 +47,8 @@ export const useSocket = () => {
     }
 
     return () => {
-      // Optional cleanup on unmount if we wanted to fully disconnect on page close, 
-      // but usually we keep it alive as long as user is logged in.
+      
+      
     };
   }, [accessToken, user, queryClient]);
 

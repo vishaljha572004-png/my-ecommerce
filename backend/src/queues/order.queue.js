@@ -1,6 +1,6 @@
 const { orderQueue } = require("./queue.client");
 
-// ── Add order confirmation job ───────────────────────────────────
+
 const addOrderJob = async (orderId) => {
   await orderQueue.add(
     "order-confirmation",

@@ -1,6 +1,6 @@
 const { notificationQueue } = require("./queue.client");
 
-// ── Add notification job ─────────────────────────────────────────
+
 const addNotificationJob = async (type, recipient, data = {}) => {
   await notificationQueue.add(
     type,

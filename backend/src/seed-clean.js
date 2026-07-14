@@ -8,12 +8,12 @@ const seedData = async () => {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/grocery');
     console.log('Connected to DB...');
 
-    // Wipe existing
+    
     await Product.deleteMany({});
     await Category.deleteMany({});
     console.log('Cleared existing junk products and categories.');
 
-    // Define 5 high-quality categories
+    
     const categoriesToInsert = [
       { name: 'Fruits', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=500&q=80' },
       { name: 'Vegetables', image: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=500&q=80' },
@@ -26,7 +26,7 @@ const seedData = async () => {
     const catMap = {};
     createdCategories.forEach(c => catMap[c.name] = c._id);
 
-    // Define 10 high-quality products
+    
     const productsToInsert = [
       { name: 'Fresh Red Apple', categoryId: catMap['Fruits'], price: 120, stock: 50, images: ['https://images.unsplash.com/photo-1560806887-1e4cd0b6fac6?auto=format&fit=crop&w=500&q=80'], description: 'Fresh and crispy red apples.' },
       { name: 'Organic Bananas', categoryId: catMap['Fruits'], price: 60, stock: 100, images: ['https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80'], description: 'Naturally ripened organic bananas.' },

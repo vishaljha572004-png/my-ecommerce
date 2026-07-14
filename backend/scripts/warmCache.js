@@ -15,12 +15,12 @@ const warmCache = async () => {
   const Category = require("../src/models/Category.model");
   const Product = require("../src/models/Product.model");
 
-  // Warm category tree
+  
   const categories = await Category.find({ isActive: true }).lean();
   await cacheService.set(KEYS.CATEGORY_TREE, categories, 3600);
   console.log(`✅  Categories warmed: ${categories.length}`);
 
-  // Warm popular products
+  
   const popularProducts = await Product.find({ isActive: true })
     .sort({ soldCount: -1 })
     .limit(50)
@@ -31,7 +31,7 @@ const warmCache = async () => {
   }
   console.log(`✅  Products warmed: ${popularProducts.length}`);
 
-  // Warm featured products
+  
   const featuredProducts = await Product.find({
     isActive: true,
     isFeatured: true,

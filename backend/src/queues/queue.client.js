@@ -3,13 +3,13 @@ const { queueClient } = require("../config/redis");
 
 const connection = queueClient;
 
-// ── Queue definitions ────────────────────────────────────────────
+
 const orderQueue = new Queue("order-processing", {
   connection,
   defaultJobOptions: {
     attempts: 3,
     backoff: { type: "exponential", delay: 2000 },
-    removeOnComplete: 100, // last 100 completed jobs rakhna
+    removeOnComplete: 100, 
     removeOnFail: 500,
   },
 });

@@ -17,7 +17,7 @@ const inventoryWorker = new Worker(
     }
 
     if (product.stock <= (threshold || 10)) {
-      // In production: send alert to admin
+      
       console.log(`
         ⚠️  Low Stock Alert
         Product: ${product.name}

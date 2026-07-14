@@ -42,7 +42,7 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
-    // Remove confirmPassword before sending to API
+    
     const { confirmPassword, ...registerData } = data;
     registerMutation.mutate(registerData);
   };

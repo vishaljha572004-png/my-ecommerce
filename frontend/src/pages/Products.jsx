@@ -38,7 +38,7 @@ const Products = () => {
   const categories = categoriesData?.data?.categories || [];
   let products = productsData?.data?.products || [];
 
-  // Client-side sorting
+  
   if (sortOption === 'price-low') {
     products = [...products].sort((a, b) => (a.discountedPrice || a.price) - (b.discountedPrice || b.price));
   } else if (sortOption === 'price-high') {
@@ -76,7 +76,7 @@ const Products = () => {
       exit={{ opacity: 0 }}
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
     >
-      {/* Header & Controls */}
+      
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-black text-gray-900 tracking-tight">
@@ -111,7 +111,7 @@ const Products = () => {
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Desktop Sidebar Filters */}
+        
         <aside className="hidden md:block w-64 shrink-0">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-28">
             <h3 className="font-black text-gray-900 mb-4 uppercase tracking-wider text-sm">Categories</h3>
@@ -140,7 +140,7 @@ const Products = () => {
           </div>
         </aside>
 
-        {/* Mobile Filters Modal */}
+        
         <AnimatePresence>
           {isMobileFiltersOpen && (
             <motion.div 
@@ -190,7 +190,7 @@ const Products = () => {
           )}
         </AnimatePresence>
 
-        {/* Product Grid */}
+        
         <main className="flex-1">
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

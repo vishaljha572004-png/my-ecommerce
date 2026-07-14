@@ -4,7 +4,7 @@ const { cloudinary } = require('./config/cloudinary');
 const Product = require('./models/Product.model');
 const Category = require('./models/Category.model');
 
-// Helper to upload a buffer to Cloudinary
+
 const uploadBufferToCloudinary = (buffer, folder, tag) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(

@@ -14,29 +14,29 @@ const redisOptions = {
   enableReadyCheck: false,
 };
 
-// Cache client — for cart, sessions, product cache, rate limiting
+
 const cacheClient = new Redis(redisOptions);
 
 cacheClient.on("connect", () => console.log("✅  Redis (cache) connected"));
 cacheClient.on("error", (err) => console.error("❌  Redis (cache) error:", err.message));
 cacheClient.on("reconnecting", () => console.warn("Redis (cache) reconnecting..."));
 
-// Queue client — separate connection required by BullMQ
+
 const queueClient = new Redis(redisOptions);
 
 queueClient.on("connect", () => console.log("✅  Redis (queue) connected"));
 queueClient.on("error", (err) => console.error("❌  Redis (queue) error:", err.message));
 queueClient.on("reconnecting", () => console.warn("Redis (queue) reconnecting..."));
 
-// Health check helper for /api/health route
+
 const ping = async () => {
   const result = await cacheClient.ping();
   return result === "PONG";
 };
 
-// connect function — no-op since lazyConnect removed
+
 const connect = async () => {
-  // Redis connects automatically on first use
+  
   return Promise.resolve();
 };
 

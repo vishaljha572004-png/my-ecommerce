@@ -90,7 +90,7 @@ const ProductDetails = () => {
       <div className="bg-white rounded-3xl border border-gray-100 shadow-soft overflow-hidden">
         <div className="flex flex-col md:flex-row">
           
-          {/* Image Gallery */}
+          
           <div className="w-full md:w-1/2 p-6 md:p-12 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col gap-6 bg-gray-50/50">
             <div className="bg-white rounded-2xl overflow-hidden aspect-square flex items-center justify-center relative shadow-sm border border-gray-100 p-8">
               {discountPercentage > 0 && (
@@ -130,7 +130,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          {/* Product Info */}
+          
           <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>

@@ -1,7 +1,7 @@
 const request = require("supertest");
 const { connect, disconnect, clearDatabase } = require("../helpers/mongo.mock");
 
-// Mock Redis
+
 jest.mock("../../src/config/redis", () => {
   const RedisMock = require("ioredis-mock");
   const client = new RedisMock();
@@ -13,7 +13,7 @@ jest.mock("../../src/config/redis", () => {
   };
 });
 
-// Mock queues
+
 jest.mock("../../src/queues/order.queue", () => ({
   addOrderJob: jest.fn(),
 }));

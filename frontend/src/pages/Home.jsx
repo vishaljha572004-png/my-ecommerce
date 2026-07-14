@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, ArrowRight, Truck, ShieldCheck, Clock, Tag } from 'lucide-react';
 import React from 'react';
 import { categoryService } from '../services/categoryService';
-import HeroBanner from '../components/home/HeroBanner';
 import CategorySection from '../components/home/CategorySection';
-import FeaturedProducts from '../components/home/FeaturedProducts';
-import FeaturesList from '../components/home/FeaturesList';
 import RecommendationSection from '../components/common/RecommendationSection';
 import { motion } from 'framer-motion';
 
@@ -38,7 +35,7 @@ const Home = () => {
       exit={{ opacity: 0, y: -20 }}
       className="space-y-12 pb-20"
     >
-      {/* Hero Section */}
+      
       <section className="bg-lightBlue pt-8 pb-12 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl overflow-hidden shadow-soft flex flex-col md:flex-row relative">
@@ -73,7 +70,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Delivery Information / Features */}
+      
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
@@ -110,7 +107,7 @@ const Home = () => {
         <RecommendationSection type="personalized" />
       </section>
 
-      {/* Featured Categories */}
+      
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-black text-gray-900 tracking-tight">Shop by Category</h2>
@@ -146,10 +143,10 @@ const Home = () => {
                   ) : (
                     <div className="w-full h-full bg-gray-100"></div>
                   )}
-                  {/* Beautiful Dark Gradient Overlay */}
+                  
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  {/* Category Name over image */}
+                  
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 transform transition-transform duration-300 group-hover:translate-y-0">
                     <span className="text-lg sm:text-xl font-black text-white leading-tight drop-shadow-lg">
                       {category.name}
@@ -163,7 +160,7 @@ const Home = () => {
         )}
       </section>
 
-      {/* Promotional Banners */}
+      
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
            <div className="bg-gradient-to-r from-accentOrange to-orange-400 rounded-3xl p-8 text-white relative overflow-hidden flex flex-col justify-center min-h-[200px] shadow-sm">

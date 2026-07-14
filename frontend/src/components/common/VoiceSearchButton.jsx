@@ -9,7 +9,7 @@ const VoiceSearchButton = ({ onSearch }) => {
   const [recognition, setRecognition] = useState(null);
 
   useEffect(() => {
-    // Check browser support
+    
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       const recognitionInstance = new SpeechRecognition();
@@ -21,7 +21,7 @@ const VoiceSearchButton = ({ onSearch }) => {
 
   useEffect(() => {
     if (recognition) {
-      // Update language based on current i18n selection
+      
       recognition.lang = i18n.language === 'hi' ? 'hi-IN' : 'en-IN';
     }
   }, [i18n.language, recognition]);

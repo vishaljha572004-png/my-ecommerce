@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { recommendationService } from '../../services/recommendationService';
-import ProductCard from '../home/ProductCard';
+import ProductCard from './ProductCard';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
@@ -39,7 +39,7 @@ const RecommendationSection = ({ type, productId }) => {
     queryKey: config?.key,
     queryFn: config?.fn,
     enabled: !!config,
-    staleTime: 5 * 60 * 1000 // 5 mins
+    staleTime: 5 * 60 * 1000 
   });
 
   if (!config) return null;

@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const deliverySlotSchema = new mongoose.Schema(
   {
     date: {
-      type: String, // "2026-06-01"
+      type: String, 
       required: true,
     },
     startTime: {
-      type: String, // "09:00"
+      type: String, 
       required: true,
     },
     endTime: {
-      type: String, // "11:00"
+      type: String, 
       required: true,
     },
     label: {
-      type: String, // "9AM - 11AM"
+      type: String, 
       required: true,
     },
     maxOrders: {

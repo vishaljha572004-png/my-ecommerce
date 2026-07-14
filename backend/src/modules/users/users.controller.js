@@ -1,6 +1,6 @@
 const usersService = require("./users.service");
 
-// ── Get my profile ───────────────────────────────────────────────
+
 const getMe = async (req, res, next) => {
   try {
     const user = await usersService.getProfile(req.user._id);
@@ -10,7 +10,7 @@ const getMe = async (req, res, next) => {
   }
 };
 
-// ── Update my profile ────────────────────────────────────────────
+
 const updateMe = async (req, res, next) => {
   try {
     const user = await usersService.updateProfile(req.user._id, req.body);
@@ -24,7 +24,7 @@ const updateMe = async (req, res, next) => {
   }
 };
 
-// ── Add address ──────────────────────────────────────────────────
+
 const addAddress = async (req, res, next) => {
   try {
     const user = await usersService.addAddress(req.user._id, req.body);
@@ -38,7 +38,7 @@ const addAddress = async (req, res, next) => {
   }
 };
 
-// ── Update address ───────────────────────────────────────────────
+
 const updateAddress = async (req, res, next) => {
   try {
     const user = await usersService.updateAddress(
@@ -56,7 +56,7 @@ const updateAddress = async (req, res, next) => {
   }
 };
 
-// ── Delete address ───────────────────────────────────────────────
+
 const deleteAddress = async (req, res, next) => {
   try {
     const user = await usersService.deleteAddress(req.user._id, req.params.id);
@@ -70,7 +70,7 @@ const deleteAddress = async (req, res, next) => {
   }
 };
 
-// ── Set default address ──────────────────────────────────────────
+
 const setDefaultAddress = async (req, res, next) => {
   try {
     const user = await usersService.setDefaultAddress(

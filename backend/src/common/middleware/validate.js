@@ -1,10 +1,10 @@
 const AppError = require("../errors/AppError");
 
-// Usage: router.post("/register", validate(schema), controller)
+
 const validate = (schema) => (req, res, next) => {
   const { error } = schema.validate(req.body, {
-    abortEarly: false,   // saari errors ek saath dikhao
-    stripUnknown: true,  // extra fields remove karo
+    abortEarly: false,   
+    stripUnknown: true,  
   });
 
   if (error) {

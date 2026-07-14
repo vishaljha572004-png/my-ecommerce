@@ -1,6 +1,6 @@
 const { createRedisMock } = require("../helpers/redis.mock");
 
-// Mock redis config before requiring cart service
+
 jest.mock("../../src/config/redis", () => ({
   cacheClient: createRedisMock(),
   queueClient: createRedisMock(),
@@ -34,7 +34,7 @@ describe("Cart Service", () => {
 
       const cartService = require("../../src/modules/cart/cart.service");
 
-      // Mock getCart to return simple response
+      
       Product.find = jest.fn().mockResolvedValue([]);
 
       await cartService.addToCart(userId, productId, 2);

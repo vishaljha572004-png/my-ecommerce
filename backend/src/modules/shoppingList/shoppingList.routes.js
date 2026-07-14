@@ -3,7 +3,7 @@ const router = express.Router();
 const shoppingListController = require('./shoppingList.controller');
 const { protect } = require('../auth/auth.middleware');
 
-router.use(protect); // All routes require authentication
+router.use(protect); 
 
 router.route('/')
   .get(shoppingListController.getLists)

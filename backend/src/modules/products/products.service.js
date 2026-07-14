@@ -5,7 +5,7 @@ const KEYS = require("../../cache/cache.keys");
 const paginate = require("../../common/utils/paginate");
 const { env } = require("../../config");
 
-// ── Get all products with filters + pagination ───────────────────
+
 const getAllProducts = async (query) => {
   const { skip, limit, meta } = paginate(query);
 
@@ -43,7 +43,7 @@ const getAllProducts = async (query) => {
   return { products, pagination: meta(total) };
 };
 
-// ── Get single product (with Redis cache) ────────────────────────
+
 const getProductById = async (id) => {
   return cacheService.getOrSet(
     KEYS.PRODUCT(id),
@@ -58,13 +58,13 @@ const getProductById = async (id) => {
   );
 };
 
-// ── Create product ───────────────────────────────────────────────
+
 const createProduct = async (data) => {
   const product = await Product.create(data);
   return product;
 };
 
-// ── Update product ───────────────────────────────────────────────
+
 const updateProduct = async (id, data) => {
   const product = await Product.findByIdAndUpdate(
     id,
@@ -73,13 +73,13 @@ const updateProduct = async (id, data) => {
   );
   if (!product) throw new AppError("Product not found", 404);
 
-  // Invalidate cache
+  
   await cacheService.del(KEYS.PRODUCT(id));
 
   return product;
 };
 
-// ── Delete product ───────────────────────────────────────────────
+
 const deleteProduct = async (id) => {
   const product = await Product.findByIdAndDelete(id);
   if (!product) throw new AppError("Product not found", 404);
@@ -89,7 +89,7 @@ const deleteProduct = async (id) => {
   return product;
 };
 
-// ── Get featured products ────────────────────────────────────────
+
 const getFeaturedProducts = async () => {
   return cacheService.getOrSet(
     "products:featured",

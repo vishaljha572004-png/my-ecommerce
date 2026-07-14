@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Hash password before saving
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(12);
@@ -70,17 +70,17 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare plain password with hashed password on login
+
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Virtual field — full name
+
 userSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
-// Strip sensitive fields from JSON response
+
 userSchema.set("toJSON", {
   virtuals: true,
   transform: (doc, ret) => {

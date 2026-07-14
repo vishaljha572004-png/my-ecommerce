@@ -40,13 +40,13 @@ describe("Cache Service", () => {
 
     expect(result1).toEqual({ data: "fresh" });
     expect(result2).toEqual({ data: "fresh" });
-    expect(fetchFn).toHaveBeenCalledTimes(1); // fetched only once
+    expect(fetchFn).toHaveBeenCalledTimes(1); 
   });
 
   it("should increment and decrement", async () => {
     await cacheService.set("test:counter", 5, 60);
 
-    // Direct Redis ops
+    
     const { cacheClient } = require("../../src/config/redis");
     await cacheClient.set("test:counter", 5);
 

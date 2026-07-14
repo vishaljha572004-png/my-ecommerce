@@ -12,7 +12,7 @@ const connect = async () => {
       serverSelectionTimeoutMS: 5000,
     });
     console.log("✅  MongoDB connected:", mongoose.connection.host);
-    retries = 0; // reset on success
+    retries = 0; 
   } catch (err) {
     retries += 1;
     console.error(`❌  MongoDB connection failed (attempt ${retries}/${MAX_RETRIES}):`, err.message);
@@ -27,7 +27,7 @@ const connect = async () => {
   }
 };
 
-// Connection events
+
 mongoose.connection.on("disconnected", () => {
   console.warn("⚠️   MongoDB disconnected. Attempting reconnect...");
   if (retries < MAX_RETRIES) connect();

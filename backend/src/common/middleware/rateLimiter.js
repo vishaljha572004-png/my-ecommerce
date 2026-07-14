@@ -1,10 +1,10 @@
-// ── Redis-backed Rate Limiter ────────────────────────────────────
-// Day 4 mein poora implement karenge
-// Abhi ke liye in-memory limiter use karo (express-rate-limit)
+
+
+
 const rateLimit = require("express-rate-limit");
 
 const defaultLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, 
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
@@ -16,7 +16,7 @@ const defaultLimiter = rateLimit({
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10, // login/register ke liye strict limit
+  max: 10, 
   standardHeaders: true,
   legacyHeaders: false,
   message: {

@@ -9,7 +9,7 @@ import NotFound from './pages/NotFound';
 import { AnimatePresence } from 'framer-motion';
 import { useSocket } from './hooks/useSocket';
 
-// Lazy loading pages for performance optimization
+
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
@@ -31,7 +31,7 @@ const PageLoader = () => (
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  useSocket(); // Initialize real-time connection if user is logged in
+  useSocket(); 
 
   React.useEffect(() => {
     const handleUnauthorized = () => {
@@ -45,7 +45,7 @@ function App() {
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          {/* Public Routes */}
+          
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
@@ -53,7 +53,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
             
-            {/* Protected Customer Routes */}
+            
             <Route element={<ProtectedRoute />}>
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-success/:id" element={<OrderSuccess />} />
@@ -67,7 +67,7 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Route>
 
-          {/* Protected Admin Routes */}
+          
           <Route element={<ProtectedRoute adminOnly={true} />}>
             <Route element={<AdminLayout />}>
               <Route path="/admin" element={<AdminDashboard />} />

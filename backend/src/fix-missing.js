@@ -7,7 +7,7 @@ const fixImages = async () => {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/grocery');
     console.log('Connected to DB...');
 
-    // Fix Croissant -> Muffins
+    
     await Product.updateOne(
       { name: 'Croissant' },
       { 
@@ -19,7 +19,7 @@ const fixImages = async () => {
       }
     );
 
-    // Fix Potato Chips
+    
     await Product.updateOne(
       { name: 'Potato Chips' },
       { 

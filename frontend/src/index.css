@@ -9,8 +9,6 @@
     @apply bg-section text-gray-900 antialiased font-sans selection:bg-primary/20 selection:text-primary;
   }
 }
-
-/* Remove scrollbar for clean horizontal scrolls */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }

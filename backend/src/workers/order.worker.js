@@ -22,8 +22,8 @@ const orderWorker = new Worker(
       return;
     }
 
-    // Send order confirmation notification
-    // In production: integrate SMS/email service here
+    
+    
     console.log(`
       ✅ Order Confirmation Sent
       Order: ${order.orderNumber}

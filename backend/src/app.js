@@ -7,7 +7,7 @@ const logger = require("./common/middleware/logger");
 const errorHandler = require("./common/errors/errorHandler");
 const { defaultLimiter } = require("./common/middleware/rateLimiter");
 
-// Route imports
+
 const authRoutes = require("./modules/auth/auth.routes");
 const usersRoutes = require("./modules/users/users.routes");
 const categoriesRoutes = require("./modules/categories/categories.routes");
@@ -25,7 +25,7 @@ const offersRoutes = require("./modules/offers/offers.routes");
 
 const app = express();
 
-// Core Middleware
+
 app.use(cors({
   origin: process.env.CLIENT_URL || "*",
   credentials: true,
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 app.use(defaultLimiter);
 
-// Health Check
+
 app.get("/api/health", async (req, res) => {
   const { redis } = require("./config");
   const mongoose = require("mongoose");
@@ -61,7 +61,7 @@ app.get("/api/health", async (req, res) => {
   });
 });
 
-// API Routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/categories", categoriesRoutes);
@@ -77,7 +77,7 @@ app.use("/api/recommendations", recommendationsRoutes);
 app.use("/api/shopping-list", shoppingListRoutes);
 app.use("/api/offers", offersRoutes);
 
-// 404 Handler
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -85,7 +85,7 @@ app.use((req, res) => {
   });
 });
 
-// Global Error Handler (must be last)
+
 app.use(errorHandler);
 
 module.exports = app;

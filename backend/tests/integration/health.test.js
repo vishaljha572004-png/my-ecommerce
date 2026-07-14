@@ -1,13 +1,13 @@
 const request = require("supertest");
 
-// Health route sirf app.js test karta hai
-// MongoDB/Redis mock nahi karte — sirf structure check
+
+
 
 describe("GET /api/health", () => {
   let app;
 
   beforeAll(() => {
-    // Environment variables set karo test ke liye
+    
     process.env.MONGO_URI = "mongodb://localhost:27017/test";
     process.env.JWT_ACCESS_SECRET = "test_access_secret_32chars_long!";
     process.env.JWT_REFRESH_SECRET = "test_refresh_secret_32chars_long";

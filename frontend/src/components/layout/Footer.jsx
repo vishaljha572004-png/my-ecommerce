@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-white border-t border-gray-100 pt-16 pb-8 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Trust Badges Section */}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12 border-b border-gray-100 mb-12">
           <div className="flex items-center gap-4 justify-center md:justify-start">
             <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">

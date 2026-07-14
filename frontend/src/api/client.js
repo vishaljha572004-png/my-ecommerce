@@ -10,7 +10,7 @@ export const apiClient = axios.create({
   },
 });
 
-// Request Interceptor: Attach access token
+
 apiClient.interceptors.request.use(
   (config) => {
     const { accessToken } = useAuthStore.getState();
@@ -22,13 +22,13 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor: Handle 401 and Refresh Token
+
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // If error is 401 (Unauthorized) and we haven't already retried
+    
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -40,24 +40,24 @@ apiClient.interceptors.response.use(
           return Promise.reject(error);
         }
 
-        // Use base axios to avoid interceptor loop
+        
         const res = await axios.post(`${baseURL}/auth/refresh-token`, {
           refreshToken,
         });
 
         const newAccessToken = res.data.data.accessToken;
         
-        // Update store with new access token
+        
         updateAccessToken(newAccessToken);
 
-        // Update header and retry the original failed request
+        
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return apiClient(originalRequest);
         
       } catch (refreshError) {
-        // If refresh fails (e.g. token expired), logout the user
+        
         useAuthStore.getState().clearAuth();
-        // We could also trigger a redirect to login here using a global event or router navigation
+        
         window.dispatchEvent(new Event('auth:unauthorized'));
         return Promise.reject(refreshError);
       }

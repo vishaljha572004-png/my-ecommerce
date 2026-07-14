@@ -65,19 +65,19 @@ class ShoppingListService {
     return await list.populate('items.productId', 'name price discountedPrice images unit stock isActive');
   }
 
-  // Generate smart suggestions based on user's past orders
+  
   async getSmartSuggestions(userId) {
-    // Fetch last 50 orders for the user
+    
     const orders = await Order.find({ userId, status: { $in: ['delivered', 'confirmed', 'processing'] } })
       .select('items.productId items.quantity createdAt')
       .sort({ createdAt: -1 })
       .limit(50);
 
-    if (orders.length === 0) return []; // Not enough history
+    if (orders.length === 0) return []; 
 
     const productStats = {};
     const recentPurchaseWindow = new Date();
-    recentPurchaseWindow.setDate(recentPurchaseWindow.getDate() - 7); // within 7 days is considered recent
+    recentPurchaseWindow.setDate(recentPurchaseWindow.getDate() - 7); 
 
     orders.forEach(order => {
       order.items.forEach(item => {
@@ -93,12 +93,12 @@ class ShoppingListService {
       });
     });
 
-    // Score logic: 
-    // - purchased frequently (count >= 2)
-    // - not purchased super recently (to avoid suggesting things they just bought yesterday, though grocery behavior varies)
+    
+    
+    
     
     const suggestedIds = Object.keys(productStats)
-      .filter(id => productStats[id].count > 1) // repeat purchase
+      .filter(id => productStats[id].count > 1) 
       .sort((a, b) => productStats[b].count - productStats[a].count)
       .slice(0, 10);
 
@@ -107,7 +107,7 @@ class ShoppingListService {
     const products = await Product.find({ 
       _id: { $in: suggestedIds },
       isActive: true,
-      stock: { $gt: 0 } // Only suggest in-stock items
+      stock: { $gt: 0 } 
     });
 
     return products;

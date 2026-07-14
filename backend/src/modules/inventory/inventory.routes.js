@@ -5,7 +5,7 @@ const inventoryService = require("./inventory.service");
 const { authenticate, adminOnly } = require("../auth/auth.middleware");
 const AppError = require("../../common/errors/AppError");
 
-// GET /api/inventory/low-stock
+
 router.get("/low-stock", authenticate, adminOnly, async (req, res, next) => {
   try {
     const threshold = parseInt(req.query.threshold) || 10;
@@ -16,7 +16,7 @@ router.get("/low-stock", authenticate, adminOnly, async (req, res, next) => {
   }
 });
 
-// GET /api/inventory/:productId
+
 router.get("/:productId", authenticate, adminOnly, async (req, res, next) => {
   try {
     const product = await inventoryService.getStock(req.params.productId);
@@ -26,7 +26,7 @@ router.get("/:productId", authenticate, adminOnly, async (req, res, next) => {
   }
 });
 
-// PUT /api/inventory/:productId
+
 router.put("/:productId", authenticate, adminOnly, async (req, res, next) => {
   try {
     const { quantity, operation } = req.body;

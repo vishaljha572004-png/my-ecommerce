@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex h-screen bg-section overflow-hidden">
-      {/* Admin Sidebar */}
+      
       <aside className="w-64 bg-white border-r border-gray-100 hidden md:flex flex-col h-full shadow-sm z-10">
         <div className="p-6 border-b border-gray-100">
           <Link to="/" className="flex items-center gap-2 group">
@@ -57,7 +57,7 @@ const AdminDashboard = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
+      
       <main className="flex-1 overflow-y-auto bg-section">
         <div className="p-6 sm:p-10 max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
@@ -96,7 +96,7 @@ const AdminDashboard = () => {
                   ))}
                 </div>
 
-                {/* Recent Orders Placeholder */}
+                
                 <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                   <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                     <h3 className="text-lg font-black text-gray-900">Recent Orders</h3>

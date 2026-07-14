@@ -53,7 +53,7 @@ const Profile = () => {
     >
       <div className="flex flex-col lg:flex-row gap-8">
         
-        {/* Sidebar */}
+        
         <div className="w-full lg:w-80 shrink-0">
           <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 sticky top-28">
             <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-100">
@@ -93,7 +93,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Main Content */}
+        
         <div className="flex-1">
           <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm border border-gray-100 min-h-[500px]">
             <AnimatePresence mode="wait">

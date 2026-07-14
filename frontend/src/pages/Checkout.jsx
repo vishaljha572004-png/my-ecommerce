@@ -93,10 +93,10 @@ const Checkout = () => {
       
       <div className="flex flex-col lg:flex-row gap-8">
         
-        {/* Checkout Steps */}
+        
         <div className="flex-1 space-y-6">
           
-          {/* Step 1: Address */}
+          
           <div className={`bg-white rounded-3xl p-6 md:p-8 shadow-sm border transition-all duration-300 ${step === 1 ? 'border-primary shadow-soft' : 'border-gray-100'}`}>
             <div className="flex items-center gap-4 mb-8">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${step === 1 ? 'bg-primary text-white shadow-soft' : 'bg-lightBlue text-primary'}`}>
@@ -150,7 +150,7 @@ const Checkout = () => {
             )}
           </div>
 
-          {/* Step 2: Delivery Slot */}
+          
           <div className={`bg-white rounded-3xl p-6 md:p-8 shadow-sm border transition-all duration-300 ${step === 2 ? 'border-primary shadow-soft' : 'border-gray-100'} ${step < 2 && 'opacity-50 pointer-events-none'}`}>
             <div className="flex items-center gap-4 mb-8">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${step === 2 ? 'bg-primary text-white shadow-soft' : step > 2 ? 'bg-lightBlue text-primary' : 'bg-gray-100 text-gray-400'}`}>
@@ -195,7 +195,7 @@ const Checkout = () => {
             ) : null}
           </div>
 
-          {/* Step 3: Payment */}
+          
           <div className={`bg-white rounded-3xl p-6 md:p-8 shadow-sm border transition-all duration-300 ${step === 3 ? 'border-primary shadow-soft' : 'border-gray-100'} ${step < 3 && 'opacity-50 pointer-events-none'}`}>
             <div className="flex items-center gap-4 mb-8">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${step === 3 ? 'bg-primary text-white shadow-soft' : 'bg-gray-100 text-gray-400'}`}>
@@ -232,7 +232,7 @@ const Checkout = () => {
 
         </div>
 
-        {/* Order Summary */}
+        
         <div className="w-full lg:w-96 shrink-0">
           <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 sticky top-28">
             <h2 className="text-xl font-black text-gray-900 mb-6">Order Summary</h2>

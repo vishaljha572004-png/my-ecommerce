@@ -141,7 +141,7 @@ const seedCatalog = async () => {
     await mongoose.connect(MONGO_URI);
     console.log('Connected to MongoDB');
 
-    // Clear existing
+    
     await Category.deleteMany({});
     await Product.deleteMany({});
     console.log('Cleared existing categories and products');
@@ -149,7 +149,7 @@ const seedCatalog = async () => {
     let displayOrder = 1;
 
     for (const catData of catalog) {
-      // Create Category
+      
       const category = new Category({
         name: catData.name,
         description: catData.description,
@@ -159,14 +159,14 @@ const seedCatalog = async () => {
       });
       await category.save();
 
-      // Create Products for Category
+      
       for (const prodData of catData.products) {
         const product = new Product({
           name: prodData.name,
           categoryId: category._id,
           unit: prodData.unit,
           price: prodData.price,
-          stock: 100, // default stock
+          stock: 100, 
           images: prodData.images,
           isActive: true
         });

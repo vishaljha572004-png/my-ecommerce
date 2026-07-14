@@ -157,7 +157,7 @@ const Navbar = () => {
               </span>
             </Link>
 
-            {/* Desktop Navigation Links (Moved to Left) */}
+            
             <div className="hidden xl:flex items-center gap-6 border-l border-gray-200 pl-6 ml-2">
               <Link to="/" className="flex items-center gap-1.5 text-gray-600 hover:text-primary transition-colors font-semibold text-sm">
                 <Home className="w-4 h-4" /> Home

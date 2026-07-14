@@ -119,7 +119,7 @@ const ShoppingLists = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        {/* Sidebar */}
+        
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4">Your Lists</h2>
@@ -165,7 +165,7 @@ const ShoppingLists = () => {
             )}
           </div>
 
-          {/* Smart Suggestions */}
+          
           {suggestions.length > 0 && activeList && (
             <div className="bg-gradient-to-br from-accentYellow/10 to-transparent rounded-2xl p-6 border border-accentYellow/20 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
@@ -186,7 +186,7 @@ const ShoppingLists = () => {
           )}
         </div>
 
-        {/* Main Content */}
+        
         <div className="lg:col-span-3">
           {activeList ? (
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm min-h-[500px]">

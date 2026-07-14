@@ -13,18 +13,18 @@ export const useAuthStore = create(
       clearAuth: () => set({ user: null, accessToken: null, refreshToken: null }),
       logout: async () => {
         try {
-          // Call backend logout to invalidate refresh token
+          
           await authService.logout();
         } catch (error) {
           console.error('Logout API error:', error);
         } finally {
-          // Clear auth state regardless of API success/failure
+          
           set({ user: null, accessToken: null, refreshToken: null });
         }
       },
     }),
     {
-      name: 'auth-storage', // saved to localStorage
+      name: 'auth-storage', 
     }
   )
 );

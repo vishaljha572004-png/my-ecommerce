@@ -10,7 +10,7 @@ const notificationWorker = new Worker(
 
     switch (type) {
       case "ORDER_CONFIRMED":
-        // In production: send SMS via Twilio/MSG91
+        
         console.log(`SMS: Order ${data.orderNumber} confirmed for ${recipient}`);
         break;
 
@@ -19,7 +19,7 @@ const notificationWorker = new Worker(
         break;
 
       case "WELCOME":
-        // In production: send welcome email via SendGrid/Nodemailer
+        
         console.log(`Email: Welcome email sent to ${recipient}`);
         break;
 

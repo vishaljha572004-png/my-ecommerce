@@ -53,7 +53,7 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Auto-generate order number before saving
+
 orderSchema.pre("save", async function (next) {
   if (!this.orderNumber) {
     const timestamp = Date.now().toString().slice(-8);

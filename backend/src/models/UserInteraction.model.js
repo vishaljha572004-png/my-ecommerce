@@ -20,14 +20,14 @@ const userInteractionSchema = new mongoose.Schema(
     },
     score: {
       type: Number,
-      default: 1, // e.g., view=1, cart=3, purchase=5
+      default: 1, 
     }
   },
   { timestamps: true }
 );
 
-// We keep a history to analyze recency. 
-// Index for quick queries
+
+
 userInteractionSchema.index({ userId: 1, productId: 1, type: 1 });
 userInteractionSchema.index({ createdAt: -1 });
 

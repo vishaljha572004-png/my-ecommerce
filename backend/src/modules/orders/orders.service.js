@@ -8,20 +8,20 @@ const { addOrderJob } = require("../../queues/order.queue");
 const { addNotificationJob } = require("../../queues/notification.queue");
 const { addInventoryCheckJob } = require("../../queues/inventory.queue");
 
-// ── Create order from cart ───────────────────────────────────────
+
 const createOrder = async (userId, { items: payloadItems, addressId, deliveryAddress, paymentMethod, deliverySlot, notes }) => {
-  // 1. Get cart from payload
+  
   if (!payloadItems || payloadItems.length === 0) {
     throw new AppError("Cart is empty", 400);
   }
   
-  // Create a rawCart map to preserve existing logic
+  
   const rawCart = {};
   payloadItems.forEach(item => {
     rawCart[item.product] = item.quantity;
   });
 
-  // 2. Get user address
+  
   const user = await User.findById(userId);
   if (!user) throw new AppError("User not found", 404);
 
@@ -41,7 +41,7 @@ const createOrder = async (userId, { items: payloadItems, addressId, deliveryAdd
     throw new AppError("Delivery address is required", 400);
   }
 
-  // 3. Build order items + validate stock
+  
   const productIds = Object.keys(rawCart);
   const products = await Product.find({ _id: { $in: productIds } });
 
@@ -73,11 +73,11 @@ const createOrder = async (userId, { items: payloadItems, addressId, deliveryAdd
     subtotal += totalPrice;
   }
 
-  // 4. Calculate charges
+  
   const deliveryCharge = subtotal >= 500 ? 0 : 40;
   const totalAmount = subtotal + deliveryCharge;
 
-  // 5. Create order
+  
   const order = await Order.create({
     userId,
     items,
@@ -96,21 +96,21 @@ const createOrder = async (userId, { items: payloadItems, addressId, deliveryAdd
     totalAmount:    Math.round(totalAmount * 100) / 100,
   });
 
-  // 6. Deduct stock
+  
   for (const product of products) {
     const quantity = parseInt(rawCart[product._id.toString()]);
     await Product.findByIdAndUpdate(product._id, {
       $inc: { stock: -quantity, soldCount: quantity },
     });
 
-    // Add inventory check job for low stock alert
+    
     await addInventoryCheckJob(product._id.toString(), 10);
   }
 
-  // 7. Clear cart
+  
   await cartService.clearCart(userId);
 
-  // 8. Add jobs to queues
+  
   await addOrderJob(order._id.toString());
   await addNotificationJob("ORDER_CONFIRMED", user.email, {
     orderNumber: order.orderNumber,
@@ -120,7 +120,7 @@ const createOrder = async (userId, { items: payloadItems, addressId, deliveryAdd
   return order;
 };
 
-// ── Get user orders ──────────────────────────────────────────────
+
 const getUserOrders = async (userId, query) => {
   const { skip, limit, meta } = paginate(query);
 
@@ -136,14 +136,14 @@ const getUserOrders = async (userId, query) => {
   return { orders, pagination: meta(total) };
 };
 
-// ── Get single order ─────────────────────────────────────────────
+
 const getOrderById = async (userId, orderId) => {
   const order = await Order.findOne({ _id: orderId, userId }).lean();
   if (!order) throw new AppError("Order not found", 404);
   return order;
 };
 
-// ── Cancel order ─────────────────────────────────────────────────
+
 const cancelOrder = async (userId, orderId) => {
   const order = await Order.findOne({ _id: orderId, userId });
   if (!order) throw new AppError("Order not found", 404);
@@ -155,7 +155,7 @@ const cancelOrder = async (userId, orderId) => {
   order.status = "cancelled";
   await order.save();
 
-  // Restore stock
+  
   for (const item of order.items) {
     await Product.findByIdAndUpdate(item.productId, {
       $inc: { stock: item.quantity, soldCount: -item.quantity },
@@ -165,7 +165,7 @@ const cancelOrder = async (userId, orderId) => {
   return order;
 };
 
-// ── Admin: update order status ───────────────────────────────────
+
 const updateOrderStatus = async (orderId, status) => {
   const order = await Order.findByIdAndUpdate(
     orderId,

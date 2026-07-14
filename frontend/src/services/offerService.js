@@ -1,4 +1,4 @@
-import client from '../api/client';
+import { apiClient as client } from "../api/client";
 
 export const offerService = {
   getMyOffers: async () => {

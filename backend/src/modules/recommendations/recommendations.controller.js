@@ -37,7 +37,7 @@ exports.logInteraction = async (req, res, next) => {
       return next(new ErrorResponse("productId and type are required", 400));
     }
     
-    // Only log if user is authenticated (using optional auth middleware in route)
+    
     if (req.user) {
       await recommendationService.logInteraction(req.user.id, productId, type);
     }

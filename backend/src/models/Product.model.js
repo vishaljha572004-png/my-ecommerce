@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-// Variant schema — e.g. 500ml, 1L, 5L
+
 const variantSchema = new mongoose.Schema({
-  name:     { type: String, required: true }, // "500ml", "1kg"
+  name:     { type: String, required: true }, 
   price:    { type: Number, required: true },
   stock:    { type: Number, default: 0 },
   sku:      { type: String, trim: true },
@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema(
     },
     unit: {
       type: String,
-      default: "piece", // kg, litre, piece, pack
+      default: "piece", 
     },
     price: {
       type: Number,
@@ -67,7 +67,7 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Text index for search
+
 productSchema.index({ name: "text", description: "text", brand: "text", tags: "text" });
 productSchema.index({ categoryId: 1 });
 productSchema.index({ price: 1 });

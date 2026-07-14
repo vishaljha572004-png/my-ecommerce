@@ -1,6 +1,6 @@
 const cartService = require("./cart.service");
 
-// ── Get cart ─────────────────────────────────────────────────────
+
 const getCart = async (req, res, next) => {
   try {
     const cart = await cartService.getCart(req.user._id);
@@ -10,7 +10,7 @@ const getCart = async (req, res, next) => {
   }
 };
 
-// ── Add to cart ──────────────────────────────────────────────────
+
 const addToCart = async (req, res, next) => {
   try {
     const { productId, quantity } = req.body;
@@ -25,7 +25,7 @@ const addToCart = async (req, res, next) => {
   }
 };
 
-// ── Update cart item ─────────────────────────────────────────────
+
 const updateCartItem = async (req, res, next) => {
   try {
     const cart = await cartService.updateCartItem(
@@ -43,7 +43,7 @@ const updateCartItem = async (req, res, next) => {
   }
 };
 
-// ── Remove from cart ─────────────────────────────────────────────
+
 const removeFromCart = async (req, res, next) => {
   try {
     const cart = await cartService.removeFromCart(
@@ -60,7 +60,7 @@ const removeFromCart = async (req, res, next) => {
   }
 };
 
-// ── Clear cart ───────────────────────────────────────────────────
+
 const clearCart = async (req, res, next) => {
   try {
     const cart = await cartService.clearCart(req.user._id);
