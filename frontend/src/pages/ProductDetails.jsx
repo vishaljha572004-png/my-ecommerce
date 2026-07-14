@@ -6,7 +6,9 @@ import { productService } from '../services/productService';
 import { useCartStore } from '../stores/useCartStore';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
-
+import { recommendationService } from '../services/recommendationService';
+import RecommendationSection from '../components/common/RecommendationSection';
+import { useEffect } from 'react';
 const ProductDetails = () => {
   const { id } = useParams();
   const [activeImage, setActiveImage] = useState(0);
@@ -19,6 +21,12 @@ const ProductDetails = () => {
     queryKey: ['product', id],
     queryFn: () => productService.getProductById(id),
   });
+
+  useEffect(() => {
+    if (data?.data?.product?._id) {
+      recommendationService.logInteraction(data.data.product._id, 'view');
+    }
+  }, [data?.data?.product?._id]);
 
   if (isLoading) {
     return (
@@ -224,6 +232,11 @@ const ProductDetails = () => {
             </p>
           </div>
         )}
+      </div>
+
+      <div className="mt-12 space-y-8">
+        <RecommendationSection type="frequentlyBought" productId={product._id} />
+        <RecommendationSection type="similar" productId={product._id} />
       </div>
     </motion.div>
   );

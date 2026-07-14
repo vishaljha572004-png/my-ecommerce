@@ -53,6 +53,24 @@ const updateOrderStatus = async (req, res, next) => {
       req.params.id,
       req.body.status
     );
+
+    // Emit socket event to the specific order room and user room
+    const io = require('../../../socket').getIo();
+    io.to(`order_${order._id}`).emit('order_status_update', {
+      orderId: order._id,
+      status: order.status,
+      updatedAt: new Date()
+    });
+    
+    // Also emit to the user's personal room for general notifications
+    if (order.userId) {
+      io.to(order.userId.toString()).emit('notification', {
+        title: 'Order Update',
+        message: `Your order #${order._id.toString().slice(-8)} is now ${order.status}`,
+        orderId: order._id
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "Order status updated",

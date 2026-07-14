@@ -1,8 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { ChevronRight, ArrowRight, Truck, ShieldCheck, Clock, Tag } from 'lucide-react';
+import React from 'react';
 import { categoryService } from '../services/categoryService';
+import HeroBanner from '../components/home/HeroBanner';
 import CategorySection from '../components/home/CategorySection';
+import FeaturedProducts from '../components/home/FeaturedProducts';
+import FeaturesList from '../components/home/FeaturesList';
+import RecommendationSection from '../components/common/RecommendationSection';
 import { motion } from 'framer-motion';
 
 const Home = () => {
@@ -99,6 +104,10 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RecommendationSection type="personalized" />
       </section>
 
       {/* Featured Categories */}

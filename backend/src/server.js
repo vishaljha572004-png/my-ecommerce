@@ -27,6 +27,10 @@ const startServer = async () => {
       console.log(`🔴  Redis UI:     http://localhost:8082\n`);
     });
 
+    // 5. Initialize Socket.io
+    const socket = require("./socket");
+    socket.init(server);
+
     // Graceful Shutdown
     const shutdown = async (signal) => {
       console.log(`\n${signal} received. Shutting down gracefully...`);

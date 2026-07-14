@@ -7,6 +7,7 @@ import ProtectedRoute from './components/layout/ProtectedRoute';
 import { Loader2 } from 'lucide-react';
 import NotFound from './pages/NotFound';
 import { AnimatePresence } from 'framer-motion';
+import { useSocket } from './hooks/useSocket';
 
 // Lazy loading pages for performance optimization
 const Home = lazy(() => import('./pages/Home'));
@@ -19,6 +20,7 @@ const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const OrderSuccess = lazy(() => import('./pages/OrderSuccess'));
 const Profile = lazy(() => import('./pages/Profile'));
+const ShoppingLists = lazy(() => import('./pages/ShoppingLists'));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-section">
@@ -29,6 +31,7 @@ const PageLoader = () => (
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  useSocket(); // Initialize real-time connection if user is logged in
 
   React.useEffect(() => {
     const handleUnauthorized = () => {
@@ -55,6 +58,7 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-success/:id" element={<OrderSuccess />} />
               <Route path="/profile/*" element={<Profile />} />
+              <Route path="/shopping-lists" element={<ShoppingLists />} />
             </Route>
           </Route>
 

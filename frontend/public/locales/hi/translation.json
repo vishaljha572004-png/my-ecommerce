@@ -1,0 +1,33 @@
+{
+  "navbar": {
+    "searchPlaceholder": "उत्पाद खोजें...",
+    "login": "लॉगिन करें",
+    "register": "रजिस्टर करें",
+    "cart": "कार्ट",
+    "profile": "प्रोफ़ाइल",
+    "logout": "लॉगआउट",
+    "shoppingLists": "शॉपिंग लिस्ट"
+  },
+  "home": {
+    "welcome": "ग्रोसरी ऐप में आपका स्वागत है",
+    "shopNow": "अभी खरीदें"
+  },
+  "product": {
+    "addToCart": "कार्ट में डालें",
+    "outOfStock": "आउट ऑफ स्टॉक",
+    "price": "मूल्य",
+    "recommendedForYou": "आपके लिए अनुशंसित",
+    "frequentlyBoughtTogether": "अक्सर एक साथ खरीदे जाने वाले",
+    "similarProducts": "समान उत्पाद"
+  },
+  "cart": {
+    "title": "आपका कार्ट",
+    "checkout": "चेकआउट करें",
+    "empty": "आपका कार्ट खाली है",
+    "subtotal": "उप-योग",
+    "total": "कुल योग"
+  },
+  "voice": {
+    "listening": "सुन रहा हूँ..."
+  }
+}

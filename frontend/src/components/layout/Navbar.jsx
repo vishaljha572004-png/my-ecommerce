@@ -7,8 +7,12 @@ import { useAuthStore } from '../../stores/useAuthStore';
 import { useDebounce } from '../../hooks/useDebounce';
 import { searchService } from '../../services/searchService';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from '../common/LanguageSelector';
+import VoiceSearchButton from '../common/VoiceSearchButton';
 
 const SearchBar = ({ isMobile }) => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const debouncedTerm = useDebounce(searchTerm, 500);
@@ -40,6 +44,12 @@ const SearchBar = ({ isMobile }) => {
     }
   };
 
+  const handleVoiceSearch = (text) => {
+    setSearchTerm(text);
+    setIsOpen(false);
+    navigate(`/products?search=${encodeURIComponent(text)}`);
+  };
+
   return (
     <div ref={wrapperRef} className={`relative ${isMobile ? 'w-full' : 'flex-1 max-w-2xl mx-8 hidden md:flex'}`}>
       <div className="relative w-full flex items-center bg-gray-100/80 rounded-xl overflow-hidden border border-transparent focus-within:border-primary/30 focus-within:bg-white focus-within:shadow-soft transition-all duration-300">
@@ -53,12 +63,15 @@ const SearchBar = ({ isMobile }) => {
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleSearch}
-          placeholder="Search for groceries, vegetables, meat..."
+          placeholder={t('navbar.searchPlaceholder') || "Search for groceries..."}
           className="w-full bg-transparent text-gray-900 py-3 pl-3 pr-4 focus:outline-none placeholder:text-gray-400 text-sm font-medium"
         />
         {searchTerm && (
-          <button onClick={() => setSearchTerm('')} className="mr-4 text-xs font-bold text-gray-400 hover:text-gray-600">CLEAR</button>
+          <button onClick={() => setSearchTerm('')} className="mr-2 text-xs font-bold text-gray-400 hover:text-gray-600">CLEAR</button>
         )}
+        <div className="mr-2">
+          <VoiceSearchButton onSearch={handleVoiceSearch} />
+        </div>
       </div>
 
       <AnimatePresence>
@@ -120,6 +133,7 @@ const SearchBar = ({ isMobile }) => {
 };
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const cartCount = useCartStore((state) => state.getCartCount());
 
@@ -165,19 +179,20 @@ const Navbar = () => {
           <SearchBar isMobile={false} />
 
           <div className="flex items-center gap-3 sm:gap-5">
+            <LanguageSelector />
 
             <Link to={user ? "/profile" : "/login"} className="hidden sm:flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-semibold text-sm">
               <div className="w-10 h-10 rounded-full bg-section flex items-center justify-center hover:bg-lightBlue hover:text-primary transition-colors">
                 <User className="w-5 h-5" />
               </div>
-              <span className="hidden lg:block">{user ? (user.name ? user.name.split(' ')[0] : 'Profile') : 'Sign In'}</span>
+              <span className="hidden lg:block">{user ? (user.name ? user.name.split(' ')[0] : t('navbar.profile')) : t('navbar.login')}</span>
             </Link>
             
             <Link to="/cart" className="flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-xl hover:bg-blue-700 transition-all shadow-soft hover:shadow-floating active:scale-95 group">
               <div className="relative">
                 <ShoppingCart className="w-5 h-5" />
               </div>
-              <span className="font-bold text-sm hidden sm:block">Cart</span>
+              <span className="font-bold text-sm hidden sm:block">{t('navbar.cart')}</span>
               {cartCount > 0 && (
                 <span className="bg-white text-primary text-xs font-black px-2 py-0.5 rounded-full shadow-sm">
                   {cartCount}

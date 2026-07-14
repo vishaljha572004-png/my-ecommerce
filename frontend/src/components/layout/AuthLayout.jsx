@@ -4,9 +4,9 @@ import { ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AuthLayout = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { user, accessToken } = useAuthStore();
 
-  if (isAuthenticated) {
+  if (accessToken && user) {
     return <Navigate to="/" replace />;
   }
 
